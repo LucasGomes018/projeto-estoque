@@ -1,0 +1,65 @@
+<%- include ('../includes/header.ejs', {titulo: 'Lista de Categorias'})%>
+
+<main>
+    <h2 class="titulo-style2">Lista de Categorias</h2>
+    <a href="/categorias/novo" class="btn btn-edit"> <i class="bi bi-plus-lg"></i> Adicionar Categoria</a>
+
+    <% if (typeof mensagem != 'undefined'){ %>
+        <p class="erro"> <%= mensagem %></p>
+    <% } %>
+
+
+    <form  action="/categorias/" method="GET" class="form form-consulta">
+        <input class="form-control" type="search" name="busca" value="<%= busca %>" placeholder="Buscar categoria" />
+        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+        <select name="ordenar" class="form-select" onchange="this.form.submit()">
+            <option value="nome_categoria"
+             <%= ordenar == 'nome_categoria' ? 'selected' : '' %> >Ordenar por Categoria</option>
+            <option value="nome_categoria desc"
+             <%= ordenar == 'nome_categoria desc' ? 'selected' : '' %>>Ordenar por Categoria dec</option>
+        </select>
+    </form>
+
+
+    <table class="dados-table">
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% for (let categoria of vetorDados) { %>
+                <tr>
+                    <td><%= categoria.nome_categoria  %></td>
+                    <td>
+                        <a href="/categorias/<%= categoria.id_categoria %>/editar" class="btn btn-success"> <i class="bi bi-pencil-square"></i> Editar</a>
+                        <form action="/categorias/<%= categoria.id_categoria%>/deletar" method="post" onsubmit="return confirmDelete()">
+                            <button type="submit" class="btn btn-danger"> <i class="bi bi-trash3"></i> Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            <% } %>
+        
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <% if (pgAtual > 1) { %>
+        <a href="/categorias?pg=<%= pgAtual - 1 %>" class="icone-paginacao"
+          ><i class="bi bi-arrow-left-circle"></i
+        ></a>
+        <% } %>
+    
+        <span>Página <%= pgAtual %> de <%= totalPgs %></span>
+    
+        <% if (pgAtual < totalPgs) { %>
+        <a href="/categorias?pg=<%= pgAtual + 1 %>" class="icone-paginacao"
+          ><i class="bi bi-arrow-right-circle"></i
+        ></a>
+        <% } %>
+      </div>
+</main>
+
+<%- include('../includes/footer.ejs') %>

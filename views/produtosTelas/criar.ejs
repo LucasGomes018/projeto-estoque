@@ -1,0 +1,49 @@
+<%- include ('../includes/header.ejs', {titulo: 'Lista de Produtos'})%>
+
+<main>
+    <h2>Adicionar Novo Produto</h2>
+
+    <form action="/produtos/novo" method="post" class="form">
+        <div class="form-group">
+            <label for="nome_produto">Produto</label>
+            <input type="text" id="name" name="nome_produto" required>
+        </div>
+
+        <div class="form-group">
+            <label for="valor">Valor</label>
+            <input type="number" id="valor" name="valor" required>
+        </div>
+
+        <div class="form-group">
+            <label for="estoque">Estoque</label>
+            <input type="number" id="estoque" name="estoque" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="estoque_min">Estoque Minímo</label>
+            <input type="number" id="estoque_min" name="estoque_min" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nome_categoria">Categoria</label>
+            <select id="id_categoria" name="id_categoria">
+                <% for(let categoria of categoriasCadastradas) { %>
+                    <option value="<%= categoria.id_categoria%>"><%=categoria.nome_categoria%></option>
+               <% } %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="imagem">Imagem</label>
+            <input type="url"  id="imagem" name="imagem" required placeholder="Cole o link da imagem aqui">
+        </div>
+    
+        <button type="submit" class="btn btn-edit mt-4">Adicionar</button>
+        <a href="/produtos/" class="btn btn-delete mt-4">Cancelar</a>
+
+
+        <% if (typeof mensagem != 'undefined'){ %>
+            <p class="erro"> <%= mensagem %></p>
+        <% } %>
+
+    </form>
+</main>

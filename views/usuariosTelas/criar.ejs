@@ -1,0 +1,29 @@
+<%- include('../includes/header.ejs', {titulo: 'Lista de Usuários'}) %>
+
+<main>
+    <h2>Cadastrar Novo Usuário</h2>
+    <!-- <a href="/usuarios/novo" class="btn btn-primary">Cadastrar Usuário</a> -->
+    <form action="/usuarios/novo" method="post" class="form">
+        <div class="form-group">
+            <label for="nome">Nome do Usuario:</label>
+            <input class="form-control" type="text" name="nome" id="name" required>
+        </div>
+        <div class="form-group">
+            <label for="usuario">Usuário</label>
+            <input class="form-control" type="text" name="usuario" id="username">
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input class="form-control" type="password" name="senha" id="password" required>
+        </div>
+        <div class="form-group">
+            <label for="senha">Imagem:</label>
+            <input class="form-control" type="url" name="imagem" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-edit">Adicionar</button>
+        <a href="/usuarios" class="btn btn-delete">Cancelar</a>
+
+    </form>
+</main>
+
+<%- include('../includes/footer.ejs') %>

@@ -1,0 +1,83 @@
+<%- include ('../includes/header.ejs', {titulo: 'Lista de Usuarios'})%>
+
+<main>
+  <h2 class="titulo-style2">Lista de Usuários</h2>
+
+  <a href="/usuarios/novo" class="btn btn-edit">
+    <i class="bi bi-plus-lg"></i> Adicionar Usuário</a
+  >
+
+  <% if (typeof mensagem != 'undefined'){ %>
+  <p class="erro"><%= mensagem %></p>
+  <% } %>
+
+  <form action="/usuarios/" method="GET" class="form form-consulta">
+    <input
+      class="form-control"
+      type="search"
+      name="busca"
+      value="<%= busca %>"
+      placeholder="Buscar Usuário"
+    />
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-search"></i>
+    </button>
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      name="ordenar"
+      onchange="this.form.submit() "
+    >
+      <option value="nome" <%= ordenar == 'nome' ? 'selected' : '' %>>Ordenar
+      por Nome <option value="usuario" <%= ordenar == 'usuario' ? 'selected': '' %>>Ordenar por Usuário</option> 
+      <option value="nome desc" <%= ordenar == 'nomedesc' ? 'selected' : '' %>>Ordenar por Nome dec</option>
+    </select>
+  </form>
+
+  <section class="d-flex gap-5 justify-content-center flex-wrap">
+    <% for (let usuario of vetorDados) { %>
+
+    <div class="card" style="width: 18rem">
+      <img src="<%= usuario.imagem %>" class="card-img-top rounded-circle" />
+      <div class="card-body">
+        <h5 class="card-title"><%= usuario.nome %></h5>
+        <p class="card-text">Usuário: <%= usuario.usuario %></p>
+      </div>
+
+      <div class="mt-2 mb-3 d-flex justify-content-around">
+        <a
+          href="/usuarios/<%= usuario.id_usuario %>/editar"
+          class="btn btn-success">
+          <i class="bi bi-pencil-square"></i> Editar</a>
+        <form
+          action="/usuarios/<%= usuario.id_usuario %>/deletar"
+          method="post"
+          onsubmit="return confirmDelete()">
+          <button type="submit" class="btn btn-delete">
+            <i class="bi bi-trash3"></i>Excluir
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <% } %>
+  </section>
+
+  <div class="pagination">
+    <% if (pgAtual > 1) { %>
+    <a href="/usuarios?pg=<%= pgAtual - 1 %>" class="icone-paginacao"
+      ><i class="bi bi-arrow-left-circle"></i
+    ></a>
+    <% } %>
+
+    <span>Página <%= pgAtual %> de <%= totalPgs %></span>
+
+    <% if (pgAtual < totalPgs) { %>
+    <a href="/usuarios?pg=<%= pgAtual + 1 %>" class="icone-paginacao"
+      ><i class="bi bi-arrow-right-circle"></i
+    ></a>
+    <% } %>
+  </div>
+</main>
+
+<%- include('../includes/footer.ejs') %>

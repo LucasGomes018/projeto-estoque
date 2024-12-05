@@ -1,0 +1,27 @@
+<%- include ('../includes/header.ejs', {titulo: 'Lista de Categorias'})%>
+
+
+<main>
+    <h2>Adicionar Nova Disciplina</h2>
+
+    <form action="/categorias/novo" method="post" class="form">
+        <div class="form-group">
+            <label for="nome_categoria">Categoria</label>
+            <input type="text" id="nome_categoria" name="nome_categoria" required>
+        </div>
+    
+        <button type="submit" class="btn btn-edit">Adicionar </button>
+        <a href="/categorias/" class="btn btn-delete">Cancelar</a>
+
+
+        <% if (typeof mensagem != 'undefined'){ %>
+            <p class="erro"> <%= mensagem %></p>
+        <% } %>
+
+    </form>
+</main>
+
+
+
+
+<%- include('../includes/footer.ejs') %>
