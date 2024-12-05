@@ -5,7 +5,6 @@ const fileUpload = require("express-fileupload")
 
 const app = express();
 
-app.use(fileUpload())
 
 // Configurações do servidor
 app.set('views', path.join(__dirname, 'views')); // Configura o diretório das views

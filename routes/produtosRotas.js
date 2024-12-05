@@ -79,8 +79,8 @@ router.get('/novo', async (req, res) => {
 router.post('/novo', async (req, res) => {
     try {
         const urlImagem = await enviarFoto(req.files.file);
-        const {nome_produto, valor, estoque, estoque_min, id_categoria, imagem} = req.body
-        await BD.query('insert into produtos (nome_produto, valor, estoque, estoque_min, id_categoria, imagem) values ($1, $2, $3, $4, $5, $6)', [nome_produto, valor, estoque, estoque_min, id_categoria, imagem])
+        const {nome_produto, valor, estoque, estoque_min, id_categoria} = req.body
+        await BD.query('insert into produtos (nome_produto, valor, estoque, estoque_min, id_categoria, imagem) values ($1, $2, $3, $4, $5, $6)', [nome_produto, valor, estoque, estoque_min, id_categoria, urlImagem])
         
         //Redirecionando para a tela de consulta de disciplina
         res.redirect('/produtos')
@@ -95,6 +95,8 @@ router.post('/novo', async (req, res) => {
 
 
 router.post('/:id/deletar', async (req, res) => {
+    const urlImagem = await excluirFoto(req.files.file);
+
     const {id} = req.params
     //const id = req.params.id 
     await BD.query('delete from produtos where id_produto = $1', [id])
@@ -128,6 +130,12 @@ router.post('/:id/editar', async(req, res) => {
     try{
         const { id } = req.params
         const {nome_produto, valor, estoque, estoque_min, id_categoria, imagem} = req.body
+
+        let urlImagem = imagem
+        if (req.files) {
+            excluirFoto(urlImagem)
+            urlImagem = await enviarFoto(req.files.file)
+        }
         await BD.query(`update produtos set nome_produto = $1, valor = $2, estoque = $3, estoque_min = $4,
              id_categoria = $5, imagem = $6 where id_produto = $7`,
             [nome_produto, valor, estoque, estoque_min, id_categoria, imagem, id])
