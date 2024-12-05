@@ -78,9 +78,10 @@ router.get('/novo', async (req, res) => {
 
 router.post('/novo', async (req, res) => {
     try {
+        const urlImagem = await enviarFoto(req.files.file);
         const {nome_produto, valor, estoque, estoque_min, id_categoria, imagem} = req.body
         await BD.query('insert into produtos (nome_produto, valor, estoque, estoque_min, id_categoria, imagem) values ($1, $2, $3, $4, $5, $6)', [nome_produto, valor, estoque, estoque_min, id_categoria, imagem])
-        const urlImagem = await enviarFoto(req.files.file);
+        
         //Redirecionando para a tela de consulta de disciplina
         res.redirect('/produtos')
 
