@@ -95,12 +95,17 @@ router.post('/novo', async (req, res) => {
 
 
 router.post('/:id/deletar', async (req, res) => {
-    const urlImagem = await excluirFoto(req.files.file);
+    try{
 
     const {id} = req.params
     //const id = req.params.id 
+    await BD.query('delete from movimentacoes where id_produto = $1', [id])
+
     await BD.query('delete from produtos where id_produto = $1', [id])
     res.redirect('/produtos')
+    } catch{
+
+    }
 })
 
 // (U - Update)
@@ -134,11 +139,11 @@ router.post('/:id/editar', async(req, res) => {
         let urlImagem = imagem
         if (req.files) {
             excluirFoto(urlImagem)
-            urlImagem = await enviarFoto(req.files.file)[""]
+            urlImagem = await enviarFoto(req.files.file)
         }
         await BD.query(`update produtos set nome_produto = $1, valor = $2, estoque = $3, estoque_min = $4,
              id_categoria = $5, imagem = $6 where id_produto = $7`,
-            [nome_produto, valor, estoque, estoque_min, id_categoria, imagem, id])
+            [nome_produto, valor, estoque, estoque_min, id_categoria, urlImagem, id])
         res.redirect('/produtos')
     
         }catch (erro) {

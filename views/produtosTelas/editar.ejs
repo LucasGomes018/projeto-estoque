@@ -37,7 +37,7 @@
         <div class="tab-content" id="myTabContent">
             <!-- Aba para Editar o Aluno -->
             <div class="tab-pane fade show active p-3" id="editar">
-                <form action="/produtos/<%= produto.id_produto%>/editar" method="post" class="form">
+                <form action="/produtos/<%= produto.id_produto%>/editar" method="post" class="form" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="nome_produto">Produto</label>
                         <input type="text" id="name" name="nome_produto" value="<%= produto.nome_produto%>"  required>
@@ -78,11 +78,11 @@
                         <label for="imagem">Imagem</label>
                         <div class="d-flex">
                             <img src="<%= produto.imagem %>" style="width: 100px; object-fit: contain;">
-                            <input type="file" id="imagem" name="imagem"  required>
+                            <input type="file" id="file" name="file"  required>
                         </div>
                         <input type="hidden" id="imagem" name="imagem" value="<%= produto.imagem %>">
                     </div>
-                
+                                    
                     <button type="submit" class="btn btn-primary">Salvar Alterações </button>
                     <a href="/produtos/" class="btn btn-secondary">Cancelar</a>
 

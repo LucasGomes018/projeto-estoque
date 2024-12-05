@@ -13,8 +13,6 @@ router.get('/', async (req, res) => {
         const limite = 4; // número de registros por página
         const offset = (pg - 1) * limite; // Qntd de registros que quero "pular"
 
-        const ativos = await BD.get(`SELECT * FROM categorias where inativo = 'null' order by ${ordenar}`, {})
-
         const buscaDados = await BD.query(` SELECT categorias.nome_categoria, id_categoria from categorias
             where upper(categorias.nome_categoria) like $1 
             order by ${ordenar} limit $2 offset $3`,  [`%${busca.toUpperCase()}%`, limite, offset])
@@ -28,7 +26,6 @@ router.get('/', async (req, res) => {
             vetorDados: buscaDados.rows,
             busca : busca,
             ordenar : ordenar,
-            ativos : ativos,
             pgAtual: parseInt(pg),
             totalPgs: totalPgs
         })
