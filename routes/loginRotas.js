@@ -14,8 +14,7 @@ router.post("/login",async (req, res) => {
     const senha = req.body.senha
 
     const buscaDados = await BD.query(`
-        select * from usuarios where usuario = $1 and senha = $2
-        `, [usuario, senha])
+        select * from usuarios where usuario = $1 and senha = $2`, [usuario, senha])
 
     //Verifica se o login e o email são válidos (se encontrou na tabela do BD)
     if (buscaDados.rows.length > 0) {
