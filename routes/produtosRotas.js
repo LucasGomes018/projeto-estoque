@@ -1,6 +1,25 @@
 const express = require('express')
 const router = express.Router()
 const BD = require('../db')
+const { put, del } = require("@vercel/blob");
+
+const enviarFoto = async (file) => {
+    const fileBuffer = file.data
+    const originalName = file.name
+    const blob = await put(originalName, fileBuffer, {
+        access: "public", // Define acesso público ao arquivo
+    });
+    console.log(`Arquivo enviado com sucesso! URL: ${blob.url}`);
+    return blob.url;
+};
+
+const excluirFoto = async (imagemUrl) => {
+    const nomeArquivo = imagemUrl.split("/").pop();
+    if (nomeArquivo) {
+        await del(nomeArquivo);
+        console.log(`Arquivo ${nomeArquivo} excluído com sucesso.`);
+    }
+}
 
 //Listar produtos (R - Read)
 //Rota localhost:3000/disciplinas/

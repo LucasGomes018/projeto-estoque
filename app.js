@@ -1,8 +1,11 @@
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
+const fileUpload = require("express-fileupload")
 
 const app = express();
+
+app.use(fileUpload())
 
 // Configurações do servidor
 app.set('views', path.join(__dirname, 'views')); // Configura o diretório das views
@@ -15,17 +18,23 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
 }))
+app.use(fileUpload())
+
 
 
 // Middleware para verificar se o usuario esta logado
 const verificarAutenticacao = (req, res, next) => {
     if (req.session.usuarioLogado) {
         // Disponibilizando o nomeUsuario da sessão para a tela .ejs
-        res.locals.nomeUsuario  = req.session.nomeUsuario
-        res.locals.id_usuario = req.session.idUsuario
+        res.locals.usuarioLogado = req.session.usuarioLogado || null;;
+        res.locals.nomeUsuario  = req.session.nomeUsuario || null;
+        res.locals.id_usuario = req.session.idUsuario || null;
         next()
     } else {
-        res.redirect('/auth/login')
+        res.locals.usuarioLogado = "Teste";
+        res.locals.nomeUsuario = "Teste";
+        res.locals.idUsuario = 1;
+        // res.redirect('/auth/login')
     }
 }
 
