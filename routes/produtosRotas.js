@@ -134,7 +134,7 @@ router.post('/:id/editar', async(req, res) => {
         let urlImagem = imagem
         if (req.files) {
             excluirFoto(urlImagem)
-            urlImagem = await enviarFoto(req.files.file)
+            urlImagem = await enviarFoto(req.files.file)[""]
         }
         await BD.query(`update produtos set nome_produto = $1, valor = $2, estoque = $3, estoque_min = $4,
              id_categoria = $5, imagem = $6 where id_produto = $7`,
