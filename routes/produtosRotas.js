@@ -39,6 +39,8 @@ router.get('/', async (req, res) => {
     }
 })
 
+
+
 //(C - Create)
 //Para acessar localhost:3000/produtos/novo
 router.get('/novo', async (req, res) => {
