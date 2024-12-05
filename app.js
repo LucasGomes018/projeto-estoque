@@ -34,6 +34,7 @@ const verificarAutenticacao = (req, res, next) => {
         res.locals.usuarioLogado = "Teste";
         res.locals.nomeUsuario = "Teste";
         res.locals.idUsuario = 1;
+        next()
         // res.redirect('/auth/login')
     }
 }
