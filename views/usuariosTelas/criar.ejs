@@ -3,7 +3,7 @@
 <main>
     <h2>Cadastrar Novo Usuário</h2>
     <!-- <a href="/usuarios/novo" class="btn btn-primary">Cadastrar Usuário</a> -->
-    <form action="/usuarios/novo" method="post" class="form">
+    <form action="/usuarios/novo" method="post" class="form" enctype="multipart/form-data">
         <div class="form-group">
             <label for="nome">Nome do Usuario:</label>
             <input class="form-control" type="text" name="nome" id="name" required>
@@ -17,8 +17,8 @@
             <input class="form-control" type="password" name="senha" id="password" required>
         </div>
         <div class="form-group">
-            <label for="senha">Imagem:</label>
-            <input class="form-control" type="url" name="imagem" id="password" required>
+            <label for="imagem">Imagem:</label>
+            <input class="form-control" type="file" name="file" id="file" required>
         </div>
         <button type="submit" class="btn btn-edit">Adicionar</button>
         <a href="/usuarios" class="btn btn-delete">Cancelar</a>

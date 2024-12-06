@@ -30,11 +30,11 @@ const verificarAutenticacao = (req, res, next) => {
         res.locals.id_usuario = req.session.idUsuario || null;
         next()
     } else {
-        res.locals.usuarioLogado = "Teste";
-        res.locals.nomeUsuario = "Teste";
-        res.locals.idUsuario = 1;
-        next()
-        // res.redirect('/auth/login')
+        // res.locals.usuarioLogado = "Teste";
+        // res.locals.nomeUsuario = "Teste";
+        // res.locals.idUsuario = 1;
+        // next()
+        res.redirect('/auth/login')
     }
 }
 

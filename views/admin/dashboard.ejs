@@ -111,6 +111,7 @@
   </section>
 </main>
 <script>
+  
   const dadosEstoqueCat = <%- JSON.stringify(produtosCategorias) %>;
 
   const nomeCategorias = dadosEstoqueCat.map(c => c.nome_categoria)
@@ -123,7 +124,10 @@
                 datasets: [{
                     label: 'Índice',
                     data: produtosCategoria,
-                    backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#6f42c1']
+                    backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#6f42c1'],
+                    borderWidth: 2,
+                    borderRadius: Number.MAX_VALUE,
+                    borderSkipped: false,
                 }]
             },
             options: {
@@ -134,12 +138,14 @@
                 }
             }
         });
+
         // Outro gráfico
   const dadosEstoqueP = <%- JSON.stringify(produtoEstoque) %>;
 
   const nomeProduto = dadosEstoqueP.map(p => p.nome_produto)
   const valorPorProduto = dadosEstoqueP.map(p => p.estoque)
   const lineCtx = document.getElementById('linhaEstoqueProdutos').getContext('2d');
+  
         new Chart(lineCtx, {
           type: 'line',
             data: {
@@ -147,7 +153,10 @@
                 datasets: [{
                     label: 'Índice',
                     data: valorPorProduto,
-                    backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#6f42c1']
+                    // backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#6f42c1'],
+                    pointStyle: 'circle',
+                    pointRadius: 7,
+                    pointHoverRadius: 15
                  }]
              },
              options: {

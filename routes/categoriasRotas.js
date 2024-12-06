@@ -53,8 +53,8 @@ router.post('/novo',  async (req, res) => {
 router.post('/:id/deletar', async (req, res) => {
     const {id} = req.params
     //const id = req.params.id 
-    // await BD.query('delete from categorias where id_categoria = $1', [id])
-    await BD.query("update categorias set inativo = 'S' where id_categoria = $1", [id])
+    await BD.query('delete from categorias where id_categoria = $1', [id])
+    // await BD.query("update categorias set inativo = 'S' where id_categoria = $1", [id])
     res.redirect('/categorias')
 })
 

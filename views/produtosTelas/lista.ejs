@@ -36,7 +36,7 @@
             <% for (let produto of vetorDados) { %>
                     
                     
-                        <div class="card" style="width: 18rem;">
+                        <div class="card detalhes-verdes2 text-light" style="width: 18rem;">
                             <img src="<%= produto.imagem %>" class="card-img-top">
                             <div class="card-body">
                             <h5 class="card-title"><%= produto.nome_produto %></h5>
@@ -47,7 +47,7 @@
                             </div>
                             
                             <div class="mt-2 mb-3 d-flex justify-content-around">
-                                <a href="/produtos/<%= produto.id_produto%>/editar" class="btn btn-success"> <i class="bi bi-pencil-square"></i> Editar</a>
+                                <a href="/produtos/<%= produto.id_produto%>/editar" class="btn btn-light text-dark"> <i class="bi bi-pencil-square"></i> Editar</a>
                                 <form action="/produtos/<%= produto.id_produto%>/deletar" method="post" onsubmit="return confirmDelete()">
                                     <button type="submit" class="btn btn-delete"><i class="bi bi-trash3"></i>Excluir</button>
                                 </form>

@@ -86,7 +86,7 @@ router.post('/novo', async (req, res) => {
         res.redirect('/produtos')
 
     } catch ( erro ) {
-        console.log('Erro ao listar disciplinas', erro)
+        console.log('Erro ao listar produtos', erro)
         res.render('produtosTelas/lista', {mensagem : erro})
     }
 })
