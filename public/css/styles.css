@@ -345,13 +345,13 @@ a{
 }
 
 .detalhes-verde2 {
-  background: linear-gradient(45deg, green, lightgreen); /* Gradiente verde */
+  background: linear-gradient(45deg, green, lightgreen) !important; /* Gradiente verde */
   /* padding: 20px; */
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 128, 0, 0.3); /* Sombra verde suave */
+  box-shadow: 0 4px 8px rgba(0, 128, 0, 0.3) !important; /* Sombra verde suave */
   color: white;
   /* font-size: 18px; */
   /* text-align: center; */
   /* margin: 20px; */
-  transition: background 0.5s ease; /* Transição suave de fundo */
+  transition: background 0.5s ease !important; /* Transição suave de fundo */
 }
