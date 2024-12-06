@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const session = require("express-session");
 const fileUpload = require("express-fileupload")
+const MongoStore = require("connect-mongo");
+
 
 const app = express();
 
@@ -16,6 +18,9 @@ app.use(session({
     secret: 'sesisenai', // Um segredo para assinar a sessão
     resave: false,
     saveUninitialized: true,
+    store: MongoStore.create({
+        mongoUrl: "mongodb+srv://senai:senai2024@session.7qyhx.mongodb.net/?retryWrites=true&w=majority&appName=session",
+      }),
 }))
 app.use(fileUpload())
 
@@ -32,7 +37,7 @@ const verificarAutenticacao = (req, res, next) => {
     } else {
         // res.locals.usuarioLogado = "Teste";
         // res.locals.nomeUsuario = "Teste";
-        // res.locals.idUsuario = 1;
+        // res.locals.idUsuario = 3;
         // next()
         res.redirect('/auth/login')
     }
